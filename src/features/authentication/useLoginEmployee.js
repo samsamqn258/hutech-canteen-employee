@@ -16,6 +16,12 @@ export default function useLoginEmployee() {
                 queryClient.setQueryData(['user'], user?.user);
 
                 toast.success('Đăng nhập thành công');
+            } else if (user?.user.roles === '104') {
+                navigate('/categorySales');
+
+                queryClient.setQueryData(['user'], user?.user);
+
+                toast.success('Đăng nhập thành công');
             } else {
                 navigate('*');
             }

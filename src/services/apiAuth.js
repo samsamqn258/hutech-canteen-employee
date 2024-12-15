@@ -32,35 +32,7 @@ export async function login({ email, password }) {
 
 export async function loginEmployee({ email, password, shop_id }) {
     try {
-        const res = await fetch(`${API_URL}/loginEmployee`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password, shop_id }),
-        });
-
-        if (!res.ok) {
-            throw new Error('Tài khoản hoặc mật khẩu không chính xác');
-        }
-        const data = await res.json();
-        const authData = {
-            accessToken: data.metaData.token.accessToken,
-            refreshToken: data.metaData.token.refreshToken,
-            user: data.metaData.user,
-        };
-
-        localStorage.setItem('authData', JSON.stringify(authData));
-
-        return data.metaData;
-    } catch (e) {
-        throw Error('Lỗi tìm nạp dữ liệu khi đăng nhập ');
-    }
-}
-
-export async function loginManager({ email, password, shop_id }) {
-    try {
-        const res = await fetch(`${API_URL}/loginBranchManager`, {
+        const res = await fetch(`${API_URL}/loginEmployeeAndManager`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
