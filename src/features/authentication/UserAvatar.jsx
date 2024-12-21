@@ -23,7 +23,7 @@ export default function UserAvatar() {
 
     return (
         <StyledUserAvatar>
-            <Avatar src="default-user.jpg" />
+            <Avatar src="/default-user.jpg" />
             <span className="text-white hover:cursor-pointer">Xin chào, {name}</span>
         </StyledUserAvatar>
     );

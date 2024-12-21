@@ -1,13 +1,14 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
-const HorizotalBarItem = ({ label, to }) => {
+const HorizontalBarItem = ({ label, to }) => {
+    const location = useLocation();
+
     return (
         <NavLink
             to={to}
-            end
-            className={({ isActive }) =>
+            className={() =>
                 `px-4 py-4 text-2xl font-light m-3 rounded-3xl ${
-                    isActive
+                    location.pathname.startsWith(to)
                         ? 'bg-[#1a4fa0] text-white'
                         : 'text-white hover:bg-[#1a4fa0]'
                 }`
@@ -18,4 +19,4 @@ const HorizotalBarItem = ({ label, to }) => {
     );
 };
 
-export default HorizotalBarItem;
+export default HorizontalBarItem;

@@ -20,7 +20,7 @@ export async function getPendingOrders() {
         }
 
         const data = await response.json();
-
+        console.log(data)
         return data;
     } catch (error) {
         console.error('Error fetching data: ', error);
@@ -47,6 +47,7 @@ export async function getSuccessOrders() {
         }
 
         const data = await response.json();
+        console.log(data)
 
         return data;
     } catch (error) {
@@ -73,7 +74,7 @@ export async function getCompletedOrders() {
         }
 
         const data = await response.json();
-        console.log(data);
+
         return data;
     } catch (error) {
         console.error('Error fetching data: ', error);
@@ -233,6 +234,9 @@ export const updateStatusCancelled = async function (id) {
 };
 
 export const updateStatusCompleted = async function (id) {
+    console.log(id
+
+    )
     try {
         const authData = JSON.parse(localStorage.getItem('authData'));
         const accessToken = authData?.accessToken;
@@ -249,7 +253,7 @@ export const updateStatusCompleted = async function (id) {
         }
 
         const data = await response.json();
-
+        console.log(data)
         return data;
     } catch (error) {
         console.error('Error fetching data: ', error);
@@ -257,3 +261,49 @@ export const updateStatusCompleted = async function (id) {
         throw error;
     }
 };
+
+export const getOrderDetail = async function (id) {
+    try {
+        const response = await fetch(`${API_URL}/getOrderDetailsStatusSuccess/${id}`);
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error('Error fetching data: ', error);
+
+        throw error;
+    }
+}
+
+export const getSummaryForToday = async function () {
+    try {
+        const authData = JSON.parse(localStorage.getItem('authData'));
+        const accessToken = authData?.accessToken;
+        const response = await fetch(`${API_URL}/getSummaryForToday`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: accessToken,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+
+
+        return data;
+    } catch (error) {
+        console.error('Error fetching data: ', error);
+
+        throw error;
+    }
+}

@@ -62,12 +62,12 @@ export default function CancelOrders() {
                                                     className="inline-block rounded w-28 h-28"
                                                 />
                                             </div>
-                                            {product.extra.length > 0 && (
+                                            {product?.extra?.length > 0 && (
                                                 <ul className="mt-2 text-lg text-gray-500">
                                                     <li className="mb-2 text-3xl font-medium text-gray-700">
                                                         Đồ ăn thêm:
                                                     </li>
-                                                    {product.extra.map(
+                                                    {product?.extra?.map(
                                                         (extra, index) => (
                                                             <li
                                                                 key={index}

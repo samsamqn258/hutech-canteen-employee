@@ -11,7 +11,7 @@ export default function useLoginEmployee() {
             loginEmployeeApi({ email, password, shop_id }),
         onSuccess: (user) => {
             if (user?.user.roles === '103') {
-                navigate('/pendingOrders');
+                navigate('/groupOrder');
 
                 queryClient.setQueryData(['user'], user?.user);
 

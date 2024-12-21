@@ -10,9 +10,7 @@ export const MENU_ITEMS = {
     ],
     // Nhân viên
     103: [
-        { label: 'Đơn hàng đang chờ ', to: '/pendingOrders' },
-        { label: 'Đơn hàng thành công', to: '/successOrders' },
-        { label: 'Đơn hàng đã nhận', to: '/completedOrders' },
-        { label: 'Đơn hàng đã hủy', to: '/cancelOrders' },
+        { label: 'Đơn đặt hàng', to: '/groupOrder' },
+        { label: 'Quét QR', to: '/qrScanner' },
     ],
 };

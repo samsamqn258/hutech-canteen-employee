@@ -2,12 +2,11 @@ import Spinner from '../../ui/Spinner';
 import usePendingOrders from './usePendingOrders';
 import { formatCurrency } from '../../utils/helpers';
 import useUpdateSuccess from './useUpdateSuccess';
-import useUpdateCancel from './useUpdateCancel';
+
 import Empty from '../../ui/Empty';
 export default function PendingOrders() {
     const { orders, isLoading } = usePendingOrders();
     const { updateSuccess, isUpdatingSuccess } = useUpdateSuccess();
-    const { updateCancel, isUpdatingCancel } = useUpdateCancel();
 
     if (isLoading) return <Spinner />;
 
@@ -22,33 +21,37 @@ export default function PendingOrders() {
                             Mã đơn
                         </th>
                         <th className="px-4 py-3 text-3xl font-semibold border border-gray-300">
+                            Sản phẩm
+                        </th>
+                        <th className="px-4 py-3 text-3xl font-semibold border border-gray-300">
                             Tên người đặt
                         </th>
                         <th className="px-4 py-3 text-3xl font-semibold border border-gray-300">
-                            Thành tiền
+                            Trạng thái
                         </th>
                         <th className="px-4 py-3 text-3xl font-semibold border border-gray-300">
-                            Đồ ăn
+                            Lựa chọn
+                        </th>
+
+
+                        <th className="px-4 py-3 text-3xl font-semibold border border-gray-300">
+                            Thành tiền
+                        </th>
+
+                        <th className=" text-3xl font-semibold border border-gray-300">
+
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.metaData.map((order) => (
+                    {orders?.metaData?.map((order) => (
                         <tr key={order._id} className="hover:bg-gray-50">
-                            <td className="w-auto px-4 py-3 text-3xl whitespace-pre-wrap border border-gray-300">
+                            <td className="p-4 text-3xl  border border-gray-300">
                                 {order.order_trackingNumber}
                             </td>
-                            <td className="w-auto px-4 py-3 text-3xl border border-gray-300 whitespace-nowrap">
-                                {order.order_userId.name}
-                            </td>
-                            <td className="px-4 py-3 text-3xl border border-gray-300">
-                                {formatCurrency(
-                                    order.order_checkout.finalPrice
-                                )}
-                            </td>
-                            <td className="flex justify-between px-4 py-3 text-lg border border-gray-300">
+                            <td className=" p-4 text-lg border border-gray-300">
                                 <div>
-                                    {order.order_product.map((product) => (
+                                    {order?.order_product?.map((product) => (
                                         <div
                                             key={product.product_id}
                                             className="pb-2 mb-4 border-b last:border-none"
@@ -57,18 +60,9 @@ export default function PendingOrders() {
                                                 {product.product_name} (
                                                 {product.quantity})
                                             </div>
-                                            <div className="text-gray-600">
-                                                <img
-                                                    src={product.product_thumb}
-                                                    alt={product.product_name}
-                                                    className="inline-block rounded w-28 h-28"
-                                                />
-                                            </div>
-                                            {product.extra.length > 0 && (
+
+                                            {product?.extra?.length > 0 && (
                                                 <ul className="mt-2 text-lg text-gray-500">
-                                                    <li className="mb-2 text-3xl font-medium text-gray-700">
-                                                        Đồ ăn thêm:
-                                                    </li>
                                                     {product.extra.map(
                                                         (extra, index) => (
                                                             <li
@@ -90,6 +84,33 @@ export default function PendingOrders() {
                                         </div>
                                     ))}
                                 </div>
+
+                            </td>
+                            <td className=" px-4 py-3 text-3xl border border-gray-300 whitespace-nowrap">
+
+                                {order.order_userId.name}
+
+
+                            </td>
+                            <td className=" px-4 py-3 text-3xl border border-gray-300 whitespace-nowrap">
+                                <div className='bg-orange-400 text-center text-white font-medium p-3 rounded-xl '>
+                                    {order.order_status === 'pending' && 'Đang chờ'}
+                                </div>
+                            </td>
+                            <td className=" px-4 py-3 text-3xl border border-gray-300 whitespace-nowrap">
+                                <div className='bg-green-400 text-center text-white font-medium p-3 rounded-xl '>
+                                    {order.dineOption === 'dine_in' ? 'Ăn tại chỗ' : 'Mang đi'}
+                                </div>
+                            </td>
+
+
+                            <td className="px-4 py-3 text-3xl border border-gray-300">
+                                {formatCurrency(
+                                    order.order_checkout.finalPrice
+                                )}
+                            </td>
+
+                            <td className='"px-4  border border-gray-300'>
                                 <div className="flex items-center justify-center h-full">
                                     <button
                                         className="px-4 py-4 mx-2 text-2xl text-white bg-green-500 rounded-lg shadow-2xl hover:bg-green-600 focus:outline-none"
@@ -98,13 +119,7 @@ export default function PendingOrders() {
                                     >
                                         Xác nhận đơn hàng
                                     </button>
-                                    <button
-                                        onClick={() => updateCancel(order._id)}
-                                        disabled={isUpdatingCancel}
-                                        className="px-4 py-4 mx-2 text-2xl text-white bg-red-500 rounded-lg shadow-2xl hover:bg-red-600 focus:outline-none"
-                                    >
-                                        Hủy bỏ
-                                    </button>
+
                                 </div>
                             </td>
                         </tr>

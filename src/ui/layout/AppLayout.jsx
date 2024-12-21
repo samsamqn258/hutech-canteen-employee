@@ -24,9 +24,9 @@ export default function AppLayout() {
                 <Header />
             </div>
             <main className="w-full h-full bg-gray-50">
-                <div className="w-4/5 mx-auto">
+          
                     <Outlet />
-                </div>
+              
             </main>
         </StyledAppLayout>
     );

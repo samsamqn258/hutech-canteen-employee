@@ -8,7 +8,7 @@ export default function useUpdateCompleted() {
     const { mutate: updateCompleted, isLoading: isUpdating } = useMutation({
         mutationFn: updateStatusCompleted,
         onSuccess: () => {
-            queryClient.invalidateQueries(['success-orders']);
+            queryClient.invalidateQueries(['summary-orders']);
             toast.success('Xác nhận nhận hàng thành công');
         },
         onError: () => {
